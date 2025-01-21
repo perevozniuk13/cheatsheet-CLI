@@ -3,7 +3,6 @@ import os
 from rich.markdown import Markdown
 from rich.console import Console
 from rich import print
-import markdown
 import pyfiglet
 
 
