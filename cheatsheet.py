@@ -2,25 +2,37 @@ import cmd
 import os
 from rich.markdown import Markdown
 from rich.console import Console
+from rich import print
 import markdown
+import pyfiglet
+
 
 
 class cheatsheetCLI(cmd.Cmd):
-    intro = '''Welcome to cheatsheetCLI! Here are the available cheatsheets:
-    1 - Python
-    2 - TypeScript
-    3 - Git
-    4 - Docker
-    5 - Node.js
-    6 - React
-    7 - AWS
-    8 - Linux
-    9 - SQL
-    
-    Type the number of the cheatsheet you need: '''
-    
     prompt = 'cheatsheetCLI>> '
     console = Console()
+    text = "CheatsheetCLI"
+    ascii_art = pyfiglet.figlet_format(text)
+
+    def __init__(self):
+        super().__init__()
+        self.print_intro()
+
+    def print_intro(self):
+        # print("[bold magenta]Welcome to cheatsheetCLI![/bold magenta]")
+        print(self.ascii_art)
+        print("")
+        print("Here are the available cheatsheets:")
+        print("")
+        print("")
+        print("[bold green]1 - Git[/bold green]")
+        print("[bold blue]2 - Python[/bold blue]")
+        print("[bold yellow]3 - Typescript[/bold yellow]")
+        print("[bold magenta]4 - Docker[/bold magenta]")
+        print("[bold cyan]5 - React[/bold cyan]")
+        print("")
+        print("")
+        print("Type the number of the cheatsheet you need (q - to exit):")
 
     def display_cheatsheet(self, file_name):
         file_path = os.path.join("cheatsheets", f"{file_name}.md")
@@ -33,19 +45,22 @@ class cheatsheetCLI(cmd.Cmd):
             print(f"Cheatsheet for {file_name} not found.")
 
     def do_1(self, arg):
-        """Display Python cheatsheet"""
-        print("Displaying Python cheatsheet...")
-        self.display_cheatsheet('python')
+        self.display_cheatsheet('git')
 
     def do_2(self, arg):
-        """Display TypeScript cheatsheet"""
-        print("Displaying TypeScript cheatsheet...")
+        self.display_cheatsheet('python')
 
     def do_3(self, arg):
-        """Display Git cheatsheet"""
-        print("Displaying Git cheatsheet...")
+        self.display_cheatsheet('typescript')
 
-    def do_exit(self, arg):
+    def do_4(self, arg):
+        self.display_cheatsheet('docker')
+
+    def do_5(self, arg):
+        self.display_cheatsheet('react')
+
+
+    def do_q(self, arg):
         """Exit the CLI"""
         print("Goodbye!")
         return True 
